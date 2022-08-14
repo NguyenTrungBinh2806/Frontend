@@ -1,7 +1,8 @@
 <div class="parent">
+
   <div class="section yellow">
-    <form>
-      <label for="id">ID</label>
+    <form [formGroup]="form" (submit)="createNote()">
+      <!-- <label for="id">ID</label>
       <br />
       <input
         type="text"
@@ -11,7 +12,7 @@
         placeholder="Enter ID"
         readonly
       />
-      <br />
+      <br /> -->
       <label for="title">Title</label>
       <br />
       <input
@@ -20,6 +21,7 @@
         id="title"
         class="input"
         placeholder="Enter title"
+        formControlName="title"
       />
       <br />
       <label for="date">Date</label>
@@ -30,6 +32,7 @@
         id="dob"
         class="input"
         placeholder="Enter date"
+        formControlName="date"
       />
       <br />
       <label for="text">Note</label>
@@ -40,12 +43,25 @@
         id="text"
         class="text"
         placeholder="Enter your note"
+        formControlName="content"
       ></textarea>
       <br />
-      <button  class="add">Save</button>
+      <button type="submit" class="add" [disabled]="!form.valid">Save</button>
     </form>
   </div>
   <div class="section purple">
+    <div class="search">
+      <label class="search_label">
+
+        <b>Tìm kiếm</b>
+      </label>
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        placeholder="Tìm kiếm"
+        class="search-input"
+      />
+    </div>
     <table>
       <tr>
         <!-- <th>Id</th> -->
@@ -56,11 +72,11 @@
       </tr>
       <tr *ngFor="let note of note$ | async">
         <!-- <td>{{ note.id }}</td> -->
-        <td>{{note.title}}</td>
-        <td>{{note.date}}</td>
-        <td>{{note.content}}</td>
+        <td>{{ note.title }}</td>
+        <td>{{ note.date }}</td>
+        <td>{{ note.content }}</td>
         <td>
-          <button class="delete">Delete</button>
+          <button class="delete" (click)="deleteNote(note.id)">Delete</button>
           <button class="update">Update</button>
         </td>
       </tr>

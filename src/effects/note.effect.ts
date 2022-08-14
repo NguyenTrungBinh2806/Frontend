@@ -22,10 +22,11 @@ export class NoteEffect {
   getNotes$ = createEffect(() =>
     this.action$.pipe(
       ofType(NoteActions.getNotes),
-      switchMap(() => this.noteService.getNotes()),
+      switchMap(() =>  this.noteService.getNotes()),
       map((notes) => NoteActions.getNotesSuccess({ notes })),
       catchError((error) => of(NoteActions.getNotesFail({ error: error })))
     )
+
   );
 
   deleteNote$ = createEffect(() =>

@@ -1,3 +1,4 @@
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NoteEffect } from 'src/effects/note.effect';
 
 import { NgModule } from '@angular/core';
@@ -18,6 +19,7 @@ import { authReducer } from 'src/reducers/auth.reducer';
 import { AuthEffect } from 'src/effects/auth.effect';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { noteReducer } from 'src/reducers/note.reducer';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -26,6 +28,7 @@ import { noteReducer } from 'src/reducers/note.reducer';
   imports: [
     BrowserModule,
     AppRoutingModule,
+
     StoreModule.forRoot({ auth: authReducer, note: noteReducer }, {}),
     EffectsModule.forRoot([AuthEffect, NoteEffect]),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -33,6 +36,9 @@ import { noteReducer } from 'src/reducers/note.reducer';
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    // Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent],
